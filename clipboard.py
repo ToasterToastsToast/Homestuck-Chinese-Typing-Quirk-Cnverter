@@ -19,36 +19,6 @@ class ClipboardHandler:
         return '\u4e00' <= char <= '\u9fff' or char.isdigit() or char in punc
 
 
-    # @staticmethod
-    # def to_rtf_styled_unicode(text, troll,i,font_size=12):
-    #     """Convert text to RTF-styled Unicode based on troll-specific formatting."""
-    #     rtf_unicode = ""
-    #     toggle_size = True  # For Gamzee's size alternation     
-    #     for char in text:
-    #         if troll == "Gamzee":
-    #             if char == '\n':
-    #                 rtf_unicode += "\\par "
-    #             elif ClipboardHandler.specialChar(char):
-    #                 font_size = "\\fs24" if toggle_size else "\\fs20"
-    #                 rtf_unicode += f"\\cf{i}{font_size}\\u{ord(char)}?"
-    #                 toggle_size = not toggle_size
-    #             else:
-    #                 rtf_unicode += f"\\cf{i}\\fs24{char}"
-    #         elif troll == "Equius":
-    #             if char in ["强", "壮", "劲"]:
-    #                 rtf_unicode += f"\\cf{i}\\b\\u{ord(char)}?\\b0"
-    #             elif char == '\n':
-    #                 rtf_unicode += "\\par "
-    #             else:
-    #                 rtf_unicode += f"\\cf{i}\\u{ord(char)}?" if ClipboardHandler.specialChar(char) else f"\\cf{i}{char}"
-    #         else:
-    #             if char == '\n':
-    #                 rtf_unicode += "\\par "
-    #             elif ClipboardHandler.specialChar(char):
-    #                 rtf_unicode += f"\\cf{i}\\u{ord(char)}?"
-    #             else:
-    #                 rtf_unicode += f"\\cf{i}{char}"
-    #     return rtf_unicode
 
     @staticmethod
     def to_rtf_styled_unicode(text, troll, i, font_size):
@@ -131,38 +101,6 @@ class ClipboardHandler:
         ClipboardHandler.copy_to_clipboard_rtf(text, troll,font_size)
 
 
-
-    # def copy_chatlog(self, chatlog_troll_mapping,font_size):
-    #     """
-    #     Copy chat log to clipboard with individual troll formatting.
-
-    #     Args:
-    #         chatlog_troll_mapping (list of tuples): List of (troll, line) tuples.
-    #     """
-    #     # Dynamically build the RTF header with the required color table
-    #     rtf_content=r'{\rtf1\ansi\deff0'
-    #     i=1
-    #     colortbl='{\colortbl;'
-    #     for troll,converseList in chatlog_troll_mapping:
-    #         text='\n'.join(converseList)
-    #         # rtf_header = r'\pard'+(RTF_COLOR_DICT.get(troll, RTF_COLOR_DICT["default"]))[28:-2]+' '
-    #         colortbl+=(RTF_COLOR_DICT.get(troll, RTF_COLOR_DICT["default"]))[28:-2]+';'
-    #         rtf_header = r'\pard'
-    #         # Build RTF content
-    #         rtf_content += rtf_header + ClipboardHandler.to_rtf_styled_unicode(text, troll,i,font_size) +r'\par'
-    #         i+=1
-
-    #     colortbl+='}'
-    #     rtf_content =rtf_content[0:17]+colortbl+rtf_content[17:]+'}'
-    #     # Encode as bytes and copy to clipboard
-    #     rtf_bytes = rtf_content.encode("utf-8")
-
-    #     win32clipboard.OpenClipboard()
-    #     win32clipboard.EmptyClipboard()
-    #     win32clipboard.SetClipboardData(
-    #         win32clipboard.RegisterClipboardFormat("Rich Text Format"), rtf_bytes
-    #     )
-    #     win32clipboard.CloseClipboard()
 
     def copy_chatlog(self, chatlog_troll_mapping, font_size):
         """
